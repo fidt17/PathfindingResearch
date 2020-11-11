@@ -60,8 +60,8 @@ public static class AStarSubregionSearch {
 
     private static int GetDistance(Subregion subA, Subregion subB) {
 
-        PathNode A = PathGrid.NodeAt(subA.avergX, subA.avergY);
-        PathNode B = PathGrid.NodeAt(subB.avergX, subB.avergY);
+        Node A = PathGrid.NodeAt(subA.avergX, subA.avergY);
+        Node B = PathGrid.NodeAt(subB.avergX, subB.avergY);
         
         int distX = Mathf.Abs(A.X - B.X);
         int distY = Mathf.Abs(A.Y - B.Y);

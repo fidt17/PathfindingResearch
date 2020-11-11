@@ -23,10 +23,10 @@ public class Region {
         RegionSystem.regions.Remove(this);
     }
 
-    public List<PathNode> GetNodes() {
-        List<PathNode> nodes = new List<PathNode>();
+    public List<Node> GetNodes() {
+        List<Node> nodes = new List<Node>();
         foreach (Subregion subregion in subregions) {
-            foreach (PathNode node in subregion.nodes) {
+            foreach (Node node in subregion.nodes) {
                 nodes.Add(node);
             }
         }

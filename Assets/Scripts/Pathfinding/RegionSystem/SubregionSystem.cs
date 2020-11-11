@@ -56,13 +56,13 @@ public static class SubregionSystem {
         return createdSubregions;
     }
 
-    private static Subregion FillSubregionFrom(PathNode node) {
-        if (node == null || node.subregion != null || node.isTraversable == false) {
+    private static Subregion FillSubregionFrom(Node node) {
+        if (node == null || node.subregion != null || node.IsTraversable == false) {
             return null;
         }
         
         Subregion subregion = new Subregion();
-        List<PathNode> openNodes = new List<PathNode>();
+        List<Node> openNodes = new List<Node>();
         openNodes.Add(node);
         do {
         } while(NextWaveIteration(ref openNodes, ref subregion));
@@ -70,7 +70,7 @@ public static class SubregionSystem {
         return subregion;
     }
 
-    private static bool NextWaveIteration(ref List<PathNode> openSet, ref Subregion subregion) {
+    private static bool NextWaveIteration(ref List<Node> openSet, ref Subregion subregion) {
         for (int i = openSet.Count - 1; i >= 0; i--) {
             if (openSet[i].subregion != null) {
                 openSet.RemoveAt(i);
@@ -81,8 +81,8 @@ public static class SubregionSystem {
             return false;
         }
 
-        foreach (PathNode neighbour in openSet[0].GetNeighbours()) {
-            if (!neighbour.isTraversable || neighbour.subregion != null
+        foreach (Node neighbour in openSet[0].GetNeighbours()) {
+            if (!neighbour.IsTraversable || neighbour.subregion != null
                 || !IsInsideArea(neighbour.X, neighbour.Y, ((int) (openSet[0].X / _subregionSize)) * _subregionSize, ((int) (openSet[0].Y / _subregionSize)) * _subregionSize)) {
                 continue;
             }

@@ -3,35 +3,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PathNode : IHeapItem<PathNode> {
+public class Node : IHeapItem<Node> {
 
-    public int X;
-    public int Y;
+    public int X, Y;
     
     public Region Region => subregion?.region;
     public Subregion subregion;
-    public PathNode parent;
 
-    public bool isTraversable;
+    public bool IsTraversable;
     public int  gCost, hCost;
-    public int  heapIndex;
     public int  fCost => gCost + hCost;
+    public Node parent;
 
-    public PathNode(int x, int y, ITraversable tile) {
+    public int  heapIndex;
+
+    public Node(int x, int y, ITraversable tile) {
         X = x;
         Y = y;
-        isTraversable = tile.IsTraversable;
+        IsTraversable = tile.IsTraversable;
         tile.OnTraversabilityChange += HandleTraversabilityChange;
     }
 
     public void HandleTraversabilityChange(object source, EventArgs e) {
         if (e is Tile.TileArgs args) {
-            isTraversable = args.isTraversable;
+            IsTraversable = args.isTraversable;
             RegionSystem.UpdateSystemAt(X, Y);
         }
     }
 
-    public int CompareTo(PathNode nodeToCompare) {
+    public int CompareTo(Node nodeToCompare) {
         
         int compare = fCost.CompareTo(nodeToCompare.fCost);
         if (compare == 0) {
@@ -48,8 +48,8 @@ public class PathNode : IHeapItem<PathNode> {
         
     }
     
-    public List<PathNode> GetNeighbours() {
-        List<PathNode> neighbours = new List<PathNode>() {
+    public List<Node> GetNeighbours() {
+        List<Node> neighbours = new List<Node>() {
             PathGrid.NodeAt(X    , Y + 1),
             PathGrid.NodeAt(X        + 1, Y),
             PathGrid.NodeAt(X    , Y - 1),

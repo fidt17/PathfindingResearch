@@ -23,7 +23,7 @@ public static class Pathfinder {
     
     #region A* + Subregion search
     
-    public static List<PathNode> GetPath(Vector2Int startPosition, Vector2Int targetPosition) {
+    public static List<Node> GetPath(Vector2Int startPosition, Vector2Int targetPosition) {
         var startNode = PathGrid.NodeAt(startPosition.x, startPosition.y);
         var targetNode = PathGrid.NodeAt(targetPosition.x, targetPosition.y);
         var path = AStarSearch.GetPath(startNode, targetNode);
@@ -48,7 +48,7 @@ public static class Pathfinder {
 
     #region A* without subregion search
     
-    public static List<PathNode> GetPathWithoutRegionSearch(Vector2Int startPosition, Vector2Int targetPosition) {
+    public static List<Node> GetPathWithoutRegionSearch(Vector2Int startPosition, Vector2Int targetPosition) {
         var startNode = PathGrid.NodeAt(startPosition.x, startPosition.y);
         var targetNode = PathGrid.NodeAt(targetPosition.x, targetPosition.y);
         var path = AStarSearch.GetPathWithoutRegionSearch(startNode, targetNode);
@@ -64,6 +64,31 @@ public static class Pathfinder {
         for (int i = 0; i < testCount; i++) {
             float startTime = Time.realtimeSinceStartup;
             AStarSearch.GetPathWithoutRegionSearch(startNode, targetNode);
+            T += (Time.realtimeSinceStartup - startTime) * 1000 / testCount;
+        }
+        Debug.Log($"{AlgoName}: {T} ms.");
+    }
+    
+    #endregion
+    
+    #region Default Pathfinding
+    
+    public static List<Node> GetDefaultPathfinding(Vector2Int startPosition, Vector2Int targetPosition) {
+        var startNode = PathGrid.NodeAt(startPosition.x, startPosition.y);
+        var targetNode = PathGrid.NodeAt(targetPosition.x, targetPosition.y);
+        var path = DefaultPathfinding.AStarSearch.GetPath(startNode, targetNode);
+        return path;
+    } 
+    
+    public static void TestTimeDefaultPathfinding(Vector2Int startPosition, Vector2Int targetPosition, int testCount) {
+        var startNode = PathGrid.NodeAt(startPosition.x, startPosition.y);
+        var targetNode = PathGrid.NodeAt(targetPosition.x, targetPosition.y);
+
+        string AlgoName = "Default Pathfinder";
+        float T = 0;
+        for (int i = 0; i < testCount; i++) {
+            float startTime = Time.realtimeSinceStartup;
+            DefaultPathfinding.AStarSearch.GetPath(startNode, targetNode);
             T += (Time.realtimeSinceStartup - startTime) * 1000 / testCount;
         }
         Debug.Log($"{AlgoName}: {T} ms.");

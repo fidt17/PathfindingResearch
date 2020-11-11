@@ -4,10 +4,10 @@ using UnityEngine;
 
 public static class PathGrid {
 
-    private static PathNode[,] _nodes;
+    private static Node[,] _nodes;
     private static bool _isInitialized = false;
 
-    public static PathNode NodeAt(int x, int y) {
+    public static Node NodeAt(int x, int y) {
         if (_isInitialized == false) {
             return null;
         }
@@ -20,10 +20,10 @@ public static class PathGrid {
 
     public static void CreateGrid(ITraversable[,] tileGrid) {
         _isInitialized = true;
-        _nodes = new PathNode[Pathfinder.MapWidth, Pathfinder.MapHeight];
+        _nodes = new Node[Pathfinder.MapWidth, Pathfinder.MapHeight];
         for (int x = 0; x < Pathfinder.MapWidth; x++) {
             for (int y = 0; y < Pathfinder.MapHeight; y++) {
-                _nodes[x, y] = new PathNode(x, y, tileGrid[x, y]);
+                _nodes[x, y] = new Node(x, y, tileGrid[x, y]);
             }
         }
     }

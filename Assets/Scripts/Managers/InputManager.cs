@@ -72,13 +72,17 @@ public class InputManager : Singleton<InputManager>
         if (Input.GetKeyDown(KeyCode.Alpha2)) {
             StartCoroutine(FindAndDrawPathWithoutRegions());
         }
+
+        if (Input.GetKeyDown(KeyCode.Alpha3)) {
+            StartCoroutine(FindAndDrawDefaultPath());
+        }
     }
 
-    private List<PathNode> _closedList;
-    private List<PathNode> _path;
+    private List<Node> _closedList;
+    private List<Node> _path;
 
-    private void AddToClosedList(PathNode node) => _closedList.Add(node);
-    private void AddToPath(PathNode node) => _path.Add(node);
+    private void AddToClosedList(Node node) => _closedList.Add(node);
+    private void AddToPath(Node node) => _path.Add(node);
 
     private bool _isDrawingPath = false;
     private IEnumerator FindAndDrawPath() {
@@ -88,8 +92,8 @@ public class InputManager : Singleton<InputManager>
 
         _isDrawingPath = true;
         
-        _closedList = new List<PathNode>();
-        _path = new List<PathNode>();
+        _closedList = new List<Node>();
+        _path = new List<Node>();
         
         Pathfinder.TestTime(MapManager.GetInstance().ActorPosition, MapManager.GetInstance().TargetPosition, 10);
         
@@ -116,8 +120,8 @@ public class InputManager : Singleton<InputManager>
 
         _isDrawingPath = true;
         
-        _closedList = new List<PathNode>();
-        _path = new List<PathNode>();
+        _closedList = new List<Node>();
+        _path = new List<Node>();
         
         Pathfinder.TestTimeWithoutRegionSearch(MapManager.GetInstance().ActorPosition, MapManager.GetInstance().TargetPosition, 10);
         
@@ -135,4 +139,34 @@ public class InputManager : Singleton<InputManager>
 
         _isDrawingPath = false;
     }
+    
+    #region Default Pathfinding
+
+    private IEnumerator FindAndDrawDefaultPath() {
+        if (_isDrawingPath) {
+            yield break;
+        }
+        _isDrawingPath = true;
+        
+        _closedList = new List<Node>();
+        _path = new List<Node>();
+        
+        Pathfinder.TestTimeDefaultPathfinding(MapManager.GetInstance().ActorPosition, MapManager.GetInstance().TargetPosition, 10);
+        
+        DefaultPathfinding.AStarSearch.HandleAddToPath      += AddToPath;
+        DefaultPathfinding.AStarSearch.HandleAddToClosedSet += AddToClosedList;
+        
+        Pathfinder.GetDefaultPathfinding(MapManager.GetInstance().ActorPosition, MapManager.GetInstance().TargetPosition);
+
+        Drawer.Instance.ClearAll();
+        yield return StartCoroutine(Drawer.Instance.DrawNodes(_closedList, GridCreator.TileType.Closed));
+        yield return StartCoroutine(Drawer.Instance.DrawNodes(_path, GridCreator.TileType.Path));
+        
+        DefaultPathfinding.AStarSearch.HandleAddToPath      -= AddToPath;
+        DefaultPathfinding.AStarSearch.HandleAddToClosedSet -= AddToClosedList;
+
+        _isDrawingPath = false;
+    }
+        
+    #endregion
 }

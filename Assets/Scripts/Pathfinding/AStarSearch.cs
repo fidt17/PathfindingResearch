@@ -7,15 +7,15 @@ using UnityEngine;
 
 public static class AStarSearch {
     
-    public delegate void OnAddToPath(PathNode node);
+    public delegate void OnAddToPath(Node node);
     public static event OnAddToPath HandleAddToPath;
 
-    public delegate void OnAddToClosedSet(PathNode node);
+    public delegate void OnAddToClosedSet(Node node);
     public static event OnAddToClosedSet HandleAddToClosedSet;
     
-    public static List<PathNode> GetPath(PathNode startNode, PathNode targetNode) {
+    public static List<Node> GetPath(Node startNode, Node targetNode) {
         if (startNode == targetNode) {
-            return new List<PathNode>();
+            return new List<Node>();
         }
         
         if (startNode.Region != targetNode.Region) {
@@ -23,19 +23,19 @@ public static class AStarSearch {
         }
 
         List<Subregion> subregions = AStarSubregionSearch.GetPath(startNode.subregion, targetNode.subregion);
-        PathNode[] possibleNodes = new PathNode[Pathfinder.MapWidth * Pathfinder.MapHeight];
+        Node[] possibleNodes = new Node[Pathfinder.MapWidth * Pathfinder.MapHeight];
         foreach (Subregion s in subregions) {
-            foreach (PathNode n in s.nodes) {
+            foreach (Node n in s.nodes) {
                 possibleNodes[n.X + n.Y * Pathfinder.MapHeight] = n;
             }
         }
         
-        Heap<PathNode> openSet = new Heap<PathNode>(Pathfinder.MapWidth * Pathfinder.MapHeight);
-        HashSet<PathNode> closedSet = new HashSet<PathNode>();
+        Heap<Node> openSet = new Heap<Node>(Pathfinder.MapWidth * Pathfinder.MapHeight);
+        HashSet<Node> closedSet = new HashSet<Node>();
         openSet.Add(startNode);
 
         while (openSet.Count > 0) {
-            PathNode currentNode = openSet.RemoveFirst();
+            Node currentNode = openSet.RemoveFirst();
             closedSet.Add(currentNode);
             HandleAddToClosedSet?.Invoke(currentNode);
             
@@ -70,21 +70,21 @@ public static class AStarSearch {
         return null;
     }
 
-    public static List<PathNode> GetPathWithoutRegionSearch(PathNode startNode, PathNode targetNode) {
+    public static List<Node> GetPathWithoutRegionSearch(Node startNode, Node targetNode) {
         if (startNode == targetNode) {
-            return new List<PathNode>();
+            return new List<Node>();
         }
         
         if (startNode.Region != targetNode.Region) {
             return null;
         }
 
-        Heap<PathNode> openSet = new Heap<PathNode>(Pathfinder.MapWidth * Pathfinder.MapHeight);
-        HashSet<PathNode> closedSet = new HashSet<PathNode>();
+        Heap<Node> openSet = new Heap<Node>(Pathfinder.MapWidth * Pathfinder.MapHeight);
+        HashSet<Node> closedSet = new HashSet<Node>();
         openSet.Add(startNode);
 
         while (openSet.Count > 0) {
-            PathNode currentNode = openSet.RemoveFirst();
+            Node currentNode = openSet.RemoveFirst();
             closedSet.Add(currentNode);
             HandleAddToClosedSet?.Invoke(currentNode);
             
@@ -119,8 +119,8 @@ public static class AStarSearch {
         return null;
     }
 
-    private static List<PathNode> GetNeighbours(PathNode node) {
-		List<PathNode> neighbours = new List<PathNode>();
+    private static List<Node> GetNeighbours(Node node) {
+		List<Node> neighbours = new List<Node>();
 		for (int x = -1; x <= 1; x++) {
 			for (int y = -1; y <= 1; y++) {
 
@@ -130,8 +130,8 @@ public static class AStarSearch {
 
 				int checkX = node.X + x;
 				int checkY = node.Y + y;
-                PathNode n = PathGrid.NodeAt(checkX, checkY);
-                if (n != null && n.isTraversable) {
+                Node n = PathGrid.NodeAt(checkX, checkY);
+                if (n != null && n.IsTraversable) {
 					neighbours.Add(n);
                 }
 			}
@@ -139,7 +139,7 @@ public static class AStarSearch {
 		return neighbours;
 	}
 
-    private static int GetDistance(PathNode A, PathNode B) {
+    private static int GetDistance(Node A, Node B) {
         int distX = Mathf.Abs(A.X - B.X);
         int distY = Mathf.Abs(A.Y - B.Y);
         if(distX > distY) {
@@ -148,7 +148,7 @@ public static class AStarSearch {
         return 14 * distX + 10 * (distY - distX);
     }
 
-    private static int Heuristic(PathNode A, PathNode B) {
+    private static int Heuristic(Node A, Node B) {
         // Octile
         int dx = Mathf.Abs(A.X - B.X);
         int dy = Mathf.Abs(A.Y - B.Y);
@@ -158,8 +158,8 @@ public static class AStarSearch {
         return Mathf.Abs(A.X - B.X) + Mathf.Abs(A.Y - B.Y);
     }
 
-    private static List<PathNode> RetracePath(PathNode startNode, PathNode currentNode) {
-        List<PathNode> path = new List<PathNode>();
+    private static List<Node> RetracePath(Node startNode, Node currentNode) {
+        List<Node> path = new List<Node>();
         do {
             path.Add(currentNode);
             currentNode = currentNode.parent;

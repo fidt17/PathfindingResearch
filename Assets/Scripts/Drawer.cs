@@ -42,7 +42,7 @@ public class Drawer : MonoBehaviour {
         DrawActorTargetPair();
     } 
 
-    public IEnumerator DrawNodes(List<PathNode> nodes, GridCreator.TileType type) {
+    public IEnumerator DrawNodes(List<Node> nodes, GridCreator.TileType type) {
         foreach (var node in nodes) {
             GridCreator.Instance.ColorTileAt(node.X, node.Y, type);
             yield return null;
@@ -57,7 +57,7 @@ public class Drawer : MonoBehaviour {
 
         _isDrawingRegions = true;
         
-        HashSet<PathNode> nodesToReset = new HashSet<PathNode>();
+        HashSet<Node> nodesToReset = new HashSet<Node>();
         foreach (var r in RegionSystem.regions) {
             var regionColor = GetRandomColor(1);
             foreach (var n in r.GetNodes()) {
@@ -72,7 +72,7 @@ public class Drawer : MonoBehaviour {
         
         foreach (var pathNode in nodesToReset) {
             GridCreator.Instance.ColorTileAt(pathNode.X, pathNode.Y,
-                                             (pathNode.isTraversable)
+                                             (pathNode.IsTraversable)
                                                  ? GridCreator.TileType.Empty
                                                  : GridCreator.TileType.Closed);
         }

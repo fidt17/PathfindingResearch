@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Subregion {
 
-    public HashSet<PathNode> nodes                  { get; protected set; } = new HashSet<PathNode>();
+    public HashSet<Node> nodes                  { get; protected set; } = new HashSet<Node>();
     public List<Subregion>  neighbouringSubregions { get; protected set; } = new List<Subregion>();
 
     public Region region { get; protected set; }
@@ -32,12 +32,12 @@ public class Subregion {
         avergY = Mathf.RoundToInt(y / nodes.Count);
     }
     
-    public void AddNode(PathNode node) {
+    public void AddNode(Node node) {
         nodes.Add(node);
         node.subregion = this;
     }
 
-    public void RemoveNode(PathNode node) {
+    public void RemoveNode(Node node) {
         nodes.Remove(node);
         node.subregion = null;
     }
@@ -76,8 +76,8 @@ public class Subregion {
     }
 
     public void FindNeighbours() {
-        foreach (PathNode node in nodes) {
-            foreach (PathNode neighbour in node.GetNeighbours()) {
+        foreach (Node node in nodes) {
+            foreach (Node neighbour in node.GetNeighbours()) {
                 if (neighbour.subregion != this && neighbour.subregion != null) {
                     AddNeighbour(neighbour.subregion);
                 }
