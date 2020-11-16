@@ -2,86 +2,72 @@
 using System;
 
 public interface IHeapItem<T> : IComparable<T> {
-	int HeapIndex {
-		get;
-		set;
-	}
+	int HeapIndex { get; set; }
 }
 
 public class Heap<T> where T : IHeapItem<T> {
 	
-    T[] items;
-    int currentItemCount;
+    public int Count { get; private set; }
+    private T[] _items;
 	
-    public Heap(int maxHeapSize) {
-        items = new T[maxHeapSize];
+    public Heap(int maxSize) {
+        _items = new T[maxSize];
     }
 	
     public void Add(T item) {
-        item.HeapIndex = currentItemCount;
-        items[currentItemCount] = item;
-        SortUp(item);
-        currentItemCount++;
+        item.HeapIndex = Count;
+        _items[Count] = item;
+        BubbleUp(item);
+        Count++;
     }
 
     public T RemoveFirst() {
-        T firstItem = items[0];
-        currentItemCount--;
-        items[0] = items[currentItemCount];
-        items[0].HeapIndex = 0;
-        SortDown(items[0]);
-        return firstItem;
+        T first = _items[0];
+        Count--;
+        _items[0] = _items[Count];
+        _items[0].HeapIndex = 0;
+        BubbleDown(_items[0]);
+        return first;
     }
 
     public void UpdateItem(T item) {
-        SortUp(item);
-    }
-
-    public int Count {
-        get {
-            return currentItemCount;
-        }
+        BubbleUp(item);
     }
 
     public bool Contains(T item) {
-        return Equals(items[item.HeapIndex], item);
+        return Equals(_items[item.HeapIndex], item);
     }
 
-    void SortDown(T item) {
+    private void BubbleDown(T item) {
         while (true) {
-            int childIndexLeft = item.HeapIndex  * 2 + 1;
-            int childIndexRight = item.HeapIndex * 2 + 2;
+            int leftChild = item.HeapIndex  * 2 + 1;
+            int rightChild = item.HeapIndex * 2 + 2;
             int swapIndex = 0;
 
-            if (childIndexLeft < currentItemCount) {
-                swapIndex = childIndexLeft;
+            if (leftChild < Count) {
+                swapIndex = leftChild;
 
-                if (childIndexRight < currentItemCount) {
-                    if (items[childIndexLeft].CompareTo(items[childIndexRight]) < 0) {
-                        swapIndex = childIndexRight;
-                    }
+                if (rightChild < Count
+                    &&_items[leftChild].CompareTo(_items[rightChild]) < 0) {
+                        swapIndex = rightChild;
                 }
 
-                if (item.CompareTo(items[swapIndex]) < 0) {
-                    Swap (item,items[swapIndex]);
-                }
-                else {
+                if (item.CompareTo(_items[swapIndex]) < 0) {
+                    Swap (item,_items[swapIndex]);
+                } else {
                     return;
                 }
-
-            }
-            else {
+            } else {
                 return;
             }
-
         }
     }
 	
-    void SortUp(T item) {
+    private void BubbleUp(T item) {
         int parentIndex = (item.HeapIndex -1) /2;
 		
         while (true) {
-            T parentItem = items[parentIndex];
+            T parentItem = _items[parentIndex];
             if (item.CompareTo(parentItem) > 0) {
                 Swap (item,parentItem);
             }
@@ -93,9 +79,9 @@ public class Heap<T> where T : IHeapItem<T> {
         }
     }
 	
-    void Swap(T itemA, T itemB) {
-        items[itemA.HeapIndex] = itemB;
-        items[itemB.HeapIndex] = itemA;
+    private void Swap(T itemA, T itemB) {
+        _items[itemA.HeapIndex] = itemB;
+        _items[itemB.HeapIndex] = itemA;
         int itemAIndex = itemA.HeapIndex;
         itemA.HeapIndex = itemB.HeapIndex;
         itemB.HeapIndex = itemAIndex;

@@ -15,7 +15,7 @@ public class Node : IHeapItem<Node> {
     public int  fCost => gCost + hCost;
     public Node parent;
 
-    public int  heapIndex;
+    public int HeapIndex { get; set; }
 
     public Node(int x, int y, ITraversable tile) {
         X = x;
@@ -63,14 +63,5 @@ public class Node : IHeapItem<Node> {
         }
 
         return neighbours;
-    }
-
-    public int HeapIndex {
-        get {
-            return heapIndex;
-        }
-        set {
-            heapIndex = value;
-        }
     }
 }
