@@ -60,7 +60,7 @@ public static class SubregionSystem {
         if (node == null || node.subregion != null || node.IsTraversable == false) {
             return null;
         }
-        
+
         Subregion subregion = new Subregion();
         List<Node> openNodes = new List<Node>();
         openNodes.Add(node);

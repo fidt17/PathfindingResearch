@@ -46,7 +46,7 @@ public static class AStarSubregionSearch {
                 if(newMovementCostToNeighbour < neighbour.gCost || !openSet.Contains(neighbour)) {
                     neighbour.gCost = newMovementCostToNeighbour;
                     neighbour.hCost = GetDistance(neighbour, targetSubregion);
-                    neighbour.parent = currentSubregion;
+                    neighbour.ParentSubregion = currentSubregion;
 
                     if (!openSet.Contains(neighbour)) {
                         openSet.Add(neighbour);
@@ -78,11 +78,12 @@ public static class AStarSubregionSearch {
         Subregion currentSubregion = endSubregion;
         while (currentSubregion != startSubregion) {
             path.Add(currentSubregion);
-            currentSubregion = currentSubregion.parent;
+            currentSubregion.ParentSubregion.child = currentSubregion;
+            currentSubregion = currentSubregion.ParentSubregion;
         }
         path.Add(startSubregion);
 
-        path.Reverse();
+        //path.Reverse();
         return path;
     }
 }

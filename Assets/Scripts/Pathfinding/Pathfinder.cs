@@ -95,4 +95,29 @@ public static class Pathfinder {
     }
     
     #endregion
+    
+    #region RCost Pathfinding
+    
+    public static List<Node> GetRCostPathfinding(Vector2Int startPosition, Vector2Int targetPosition) {
+        var startNode = PathGrid.NodeAt(startPosition.x, startPosition.y);
+        var targetNode = PathGrid.NodeAt(targetPosition.x, targetPosition.y);
+        var path = RCostPathfinding.AStarSearch.GetPath(startNode, targetNode);
+        return path;
+    } 
+    
+    public static void TestTimeRCostPathfinding(Vector2Int startPosition, Vector2Int targetPosition, int testCount) {
+        var startNode = PathGrid.NodeAt(startPosition.x, startPosition.y);
+        var targetNode = PathGrid.NodeAt(targetPosition.x, targetPosition.y);
+
+        string AlgoName = "RCost Pathfinder";
+        float T = 0;
+        for (int i = 0; i < testCount; i++) {
+            float startTime = Time.realtimeSinceStartup;
+            RCostPathfinding.AStarSearch.GetPath(startNode, targetNode);
+            T += (Time.realtimeSinceStartup - startTime) * 1000 / testCount;
+        }
+        Debug.Log($"{AlgoName}: {T} ms.");
+    }
+    
+    #endregion
 }

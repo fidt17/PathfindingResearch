@@ -54,12 +54,14 @@ public static class AStarSearch {
                     if (newCostToNeighbour < neighbour.gCost) {
                         neighbour.gCost = newCostToNeighbour;
                         neighbour.hCost = Heuristic(neighbour, targetNode);
+                        neighbour.rCost = 0;
                         neighbour.parent = currentNode;
                         openSet.UpdateItem(neighbour);
                     }
                 } else {
                     neighbour.gCost = newCostToNeighbour;
                     neighbour.hCost = Heuristic(neighbour, targetNode);
+                    neighbour.rCost = 0;
                     neighbour.parent = currentNode;
                     
                     openSet.Add(neighbour);

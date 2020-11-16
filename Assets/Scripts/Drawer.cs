@@ -97,6 +97,11 @@ public class Drawer : MonoBehaviour {
         }
 
         while (Input.GetKey(KeyCode.L)) {
+            Vector2Int pos = InputManager.GetInstance().CursorToMapPosition();
+            Node n = PathGrid.NodeAt(pos.x, pos.y);
+            if (n?.subregion != null) {
+                Debug.Log($"AvgX: {n.subregion.avergX}, AvgY: {n.subregion.avergY}.");
+            }
             yield return null;
         }
         

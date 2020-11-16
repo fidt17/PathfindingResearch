@@ -13,23 +13,34 @@ public class Subregion {
     public void SetRegion(Region region) => this.region = region;
 
     //Pathfinding
-    public Subregion parent;
+    public Subregion ParentSubregion;
+
+    private Subregion _parent;
+    
     public int       gCost, hCost;
     public int       fCost => gCost + hCost;
 
-    public int avergX, avergY;
+    public Subregion child;
+    public int avergX,     avergY;
     //
 
     public void CalculateAverageCoordinates() {
-        float x = 0;
-        float y = 0;
+        //Finding node with minimum distance to all other nodes
+        int minSqrDistance = Int32.MaxValue;
         foreach (var node in nodes) {
-            x += node.X;
-            y += node.Y;
+            int currSqrDistance = 0;
+            foreach (var border in nodes) {
+                int dX = (border.X >= node.X) ? border.X - node.X : node.X - border.X;
+                int dY = (border.Y >= node.Y) ? border.Y - node.Y : node.Y - border.Y;
+                currSqrDistance += (int) (Mathf.Pow(dX, 2) + Mathf.Pow(dY, 2));
+            }
+
+            if (currSqrDistance < minSqrDistance) {
+                minSqrDistance = currSqrDistance;
+                avergX = node.X;
+                avergY = node.Y;
+            }
         }
-        
-        avergX = Mathf.RoundToInt(x / nodes.Count);
-        avergY = Mathf.RoundToInt(y / nodes.Count);
     }
     
     public void AddNode(Node node) {

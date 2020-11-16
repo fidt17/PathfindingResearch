@@ -11,8 +11,8 @@ public class Node : IHeapItem<Node> {
     public Subregion subregion;
 
     public bool IsTraversable;
-    public int  gCost, hCost;
-    public int  fCost => gCost + hCost;
+    public int  gCost, hCost, rCost;
+    public int  fCost => gCost + hCost + rCost;
     public Node parent;
 
     public int HeapIndex { get; set; }
@@ -45,7 +45,6 @@ public class Node : IHeapItem<Node> {
         }
         return -compare;
         */
-        
     }
     
     public List<Node> GetNeighbours() {

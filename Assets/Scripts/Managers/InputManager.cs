@@ -3,11 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InputManager : Singleton<InputManager>
-{
-    private Vector2Int CursorToMapPosition() => ToGridPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-    private Vector2Int ToGridPosition(Vector2 value) => new Vector2Int((int) (value.x + 0.5f), (int) (value.y + 0.5f));
-    private Tile _prevTile;
+public class InputManager : Singleton<InputManager> {
+    
+    public Vector2Int CursorToMapPosition() => ToGridPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+    public Vector2Int ToGridPosition(Vector2 value) => new Vector2Int((int) (value.x + 0.5f), (int) (value.y + 0.5f));
 
     private delegate void MouseClickHandler(Vector2Int cursorPositionOnGrid);
     private event MouseClickHandler OnMouseClick;
@@ -75,6 +74,10 @@ public class InputManager : Singleton<InputManager>
 
         if (Input.GetKeyDown(KeyCode.Alpha3)) {
             StartCoroutine(FindAndDrawDefaultPath());
+        }
+        
+        if (Input.GetKeyDown(KeyCode.Alpha4)) {
+            StartCoroutine(FindAndDrawRCostPath());
         }
     }
 
@@ -164,6 +167,36 @@ public class InputManager : Singleton<InputManager>
         
         DefaultPathfinding.AStarSearch.HandleAddToPath      -= AddToPath;
         DefaultPathfinding.AStarSearch.HandleAddToClosedSet -= AddToClosedList;
+
+        _isDrawingPath = false;
+    }
+        
+    #endregion
+    
+    #region RCost Pathfinding
+
+    private IEnumerator FindAndDrawRCostPath() {
+        if (_isDrawingPath) {
+            yield break;
+        }
+        _isDrawingPath = true;
+        
+        _closedList = new List<Node>();
+        _path = new List<Node>();
+        
+        Pathfinder.TestTimeRCostPathfinding(MapManager.GetInstance().ActorPosition, MapManager.GetInstance().TargetPosition, 10);
+        
+        RCostPathfinding.AStarSearch.HandleAddToPath      += AddToPath;
+        RCostPathfinding.AStarSearch.HandleAddToClosedSet += AddToClosedList;
+        
+        Pathfinder.GetRCostPathfinding(MapManager.GetInstance().ActorPosition, MapManager.GetInstance().TargetPosition);
+
+        Drawer.Instance.ClearAll();
+        yield return StartCoroutine(Drawer.Instance.DrawNodes(_closedList, GridCreator.TileType.Closed));
+        yield return StartCoroutine(Drawer.Instance.DrawNodes(_path, GridCreator.TileType.Path));
+        
+        RCostPathfinding.AStarSearch.HandleAddToPath      -= AddToPath;
+        RCostPathfinding.AStarSearch.HandleAddToClosedSet -= AddToClosedList;
 
         _isDrawingPath = false;
     }

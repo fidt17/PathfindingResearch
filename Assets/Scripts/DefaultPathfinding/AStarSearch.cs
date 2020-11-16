@@ -43,6 +43,7 @@ namespace DefaultPathfinding {
                     if (newCostToNeighbour < neighbour.gCost || !isInOpenSet) {
                         neighbour.gCost = newCostToNeighbour;
                         neighbour.hCost = Heuristic(neighbour, targetNode);
+                        neighbour.rCost = 0;
                         neighbour.parent = currentNode;
 
                         if (!isInOpenSet) {
