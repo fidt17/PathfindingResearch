@@ -7,6 +7,11 @@ public class Node : IHeapItem<Node> {
 
     public int X, Y;
     
+    //NEEDED FOR VISUALIZATION OF FLOOD FILL ALGORITHM
+    //REMOVE ME
+    public Color rColor;
+    //
+    
     public Region Region => subregion?.region;
     public Subregion subregion;
 
@@ -48,11 +53,11 @@ public class Node : IHeapItem<Node> {
     }
     
     public List<Node> GetNeighbours() {
-        List<Node> neighbours = new List<Node>() {
+        var neighbours = new List<Node>() {
             PathGrid.NodeAt(X    , Y + 1),
-            PathGrid.NodeAt(X        + 1, Y),
+            PathGrid.NodeAt(X + 1, Y    ),
             PathGrid.NodeAt(X    , Y - 1),
-            PathGrid.NodeAt(X        - 1, Y)
+            PathGrid.NodeAt(X - 1, Y    )
         };
 
         for (int i = neighbours.Count - 1; i >= 0; i--) {

@@ -11,6 +11,8 @@ public class InputManager : Singleton<InputManager> {
     private delegate void MouseClickHandler(Vector2Int cursorPositionOnGrid);
     private event MouseClickHandler OnMouseClick;
     
+    private bool _isDrawing = false;
+    
     #region Setup buttons
     
     private void BuildWallAt(Vector2Int position) {
@@ -55,6 +57,8 @@ public class InputManager : Singleton<InputManager> {
             StartCoroutine(Drawer.Instance.DrawRegions());
         }
     }
+
+    public void OnFillMapPress() => StartCoroutine(FillMap());
     
     #endregion
     
@@ -83,17 +87,54 @@ public class InputManager : Singleton<InputManager> {
 
     private List<Node> _closedList;
     private List<Node> _path;
+    private List<Node> _fillNodes;
 
     private void AddToClosedList(Node node) => _closedList.Add(node);
     private void AddToPath(Node node) => _path.Add(node);
+    private void AddToMapFill(Node node) => _fillNodes.Add(node); 
+    
+    #region Map Fill
 
-    private bool _isDrawingPath = false;
-    private IEnumerator FindAndDrawPath() {
-        if (_isDrawingPath) {
+    private IEnumerator FillMap() {
+        if (_isDrawing) {
             yield break;
         }
 
-        _isDrawingPath = true;
+        _isDrawing = true;
+
+        _fillNodes = new List<Node>();
+        FloodFill.HandleAddNodeToRegion += AddToMapFill;
+        
+        FloodFill.FillMap();
+        
+        FloodFill.HandleAddNodeToRegion -= AddToMapFill;
+        
+        //600 frames
+        //_fillNodes.Count / 600
+
+        int iterationCount = _fillNodes.Count / 600;
+        int i = 0;        
+        foreach (var n in _fillNodes) {
+            GridCreator.Instance.ColorTileAt(n.X, n.Y, n.rColor);
+            if (i > iterationCount) {
+                yield return null;
+                i = 0;
+            } else {
+                i++;
+            }
+        }
+        
+        _isDrawing = false;
+    }
+    
+    #endregion
+    
+    private IEnumerator FindAndDrawPath() {
+        if (_isDrawing) {
+            yield break;
+        }
+
+        _isDrawing = true;
         
         _closedList = new List<Node>();
         _path = new List<Node>();
@@ -113,15 +154,15 @@ public class InputManager : Singleton<InputManager> {
         AStarSearch.HandleAddToPath      -= AddToPath;
         AStarSearch.HandleAddToClosedSet -= AddToClosedList;
 
-        _isDrawingPath = false;
+        _isDrawing = false;
     }
     
     private IEnumerator FindAndDrawPathWithoutRegions() {
-        if (_isDrawingPath) {
+        if (_isDrawing) {
             yield break;
         }
 
-        _isDrawingPath = true;
+        _isDrawing = true;
         
         _closedList = new List<Node>();
         _path = new List<Node>();
@@ -140,16 +181,16 @@ public class InputManager : Singleton<InputManager> {
         AStarSearch.HandleAddToPath      -= AddToPath;
         AStarSearch.HandleAddToClosedSet -= AddToClosedList;
 
-        _isDrawingPath = false;
+        _isDrawing = false;
     }
     
     #region Default Pathfinding
 
     private IEnumerator FindAndDrawDefaultPath() {
-        if (_isDrawingPath) {
+        if (_isDrawing) {
             yield break;
         }
-        _isDrawingPath = true;
+        _isDrawing = true;
         
         _closedList = new List<Node>();
         _path = new List<Node>();
@@ -168,7 +209,7 @@ public class InputManager : Singleton<InputManager> {
         DefaultPathfinding.AStarSearch.HandleAddToPath      -= AddToPath;
         DefaultPathfinding.AStarSearch.HandleAddToClosedSet -= AddToClosedList;
 
-        _isDrawingPath = false;
+        _isDrawing = false;
     }
         
     #endregion
@@ -176,10 +217,10 @@ public class InputManager : Singleton<InputManager> {
     #region RCost Pathfinding
 
     private IEnumerator FindAndDrawRCostPath() {
-        if (_isDrawingPath) {
+        if (_isDrawing) {
             yield break;
         }
-        _isDrawingPath = true;
+        _isDrawing = true;
         
         _closedList = new List<Node>();
         _path = new List<Node>();
@@ -198,7 +239,7 @@ public class InputManager : Singleton<InputManager> {
         RCostPathfinding.AStarSearch.HandleAddToPath      -= AddToPath;
         RCostPathfinding.AStarSearch.HandleAddToClosedSet -= AddToClosedList;
 
-        _isDrawingPath = false;
+        _isDrawing = false;
     }
         
     #endregion

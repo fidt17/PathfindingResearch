@@ -11,6 +11,9 @@
             <e p="AStarSearch.cs" t="Include" />
           </e>
           <e p="Drawer.cs" t="Include" />
+          <e p="FloodFill" t="Include">
+            <e p="FloodFill.cs" t="Include" />
+          </e>
           <e p="Grid" t="Include">
             <e p="GridCreator.cs" t="Include" />
             <e p="Tile.cs" t="Include" />
