@@ -102,8 +102,8 @@ namespace RCostPathfinding {
 
             return null;
         }
-
-        public static List<Node> GetPathWithoutRegionSearch(Node startNode, Node targetNode) {
+        
+        public static List<Node> GetPathNew(Node startNode, Node targetNode) {
             if (startNode == targetNode) {
                 return new List<Node>();
             }
@@ -112,40 +112,60 @@ namespace RCostPathfinding {
                 return null;
             }
 
+            Stack<Subregion> subregions = new Stack<Subregion>(AStarSubregionSearch.GetPath(startNode.subregion, targetNode.subregion));
+            
             Heap<Node> openSet = new Heap<Node>(Pathfinder.MapWidth * Pathfinder.MapHeight);
             HashSet<Node> closedSet = new HashSet<Node>();
             openSet.Add(startNode);
 
             while (openSet.Count > 0) {
-                Node currentNode = openSet.RemoveFirst();
+                Node currentNode;
+                do {
+                    currentNode = openSet.RemoveFirst();
+                    if (subregions.Count == 0 || currentNode.subregion == subregions.Peek()) {
+                        break;
+                    }
+                } while (true);
+                
                 closedSet.Add(currentNode);
                 HandleAddToClosedSet?.Invoke(currentNode);
-
+                
                 if (currentNode == targetNode) {
-                    var path = RetracePath(startNode, targetNode);
-                    return path;
+                    return RetracePath(startNode, targetNode);
                 }
 
                 foreach (var neighbour in GetNeighbours(currentNode)) {
                     if (closedSet.Contains(neighbour)) {
                         continue;
                     }
+                    
+                    if (subregions.Count != 0 && subregions.Peek().child == neighbour.subregion) {
+                        subregions.Peek().child = null;
+                        subregions.Pop();
+                    }
+                    
+                    if (closedSet.Contains(neighbour) || (subregions.Count != 0 && !subregions.Peek().nodes.Contains(neighbour))) {
+                        continue;
+                    }
 
                     int newCostToNeighbour = currentNode.gCost + GetDistance(currentNode, neighbour);
-                    if (openSet.Contains(neighbour)) {
-                        if (newCostToNeighbour < neighbour.gCost) {
-                            neighbour.gCost = newCostToNeighbour;
-                            neighbour.hCost = Heuristic(neighbour, targetNode);
-                            neighbour.parent = currentNode;
-                            openSet.UpdateItem(neighbour);
-                        }
-                    }
-                    else {
+                    bool isInOpenSet = openSet.Contains(neighbour);
+                    if (newCostToNeighbour < neighbour.gCost || !isInOpenSet) {
                         neighbour.gCost = newCostToNeighbour;
                         neighbour.hCost = Heuristic(neighbour, targetNode);
+
+                        if (neighbour.subregion.child != null) {
+                            neighbour.rCost = GetDistance(neighbour, PathGrid.NodeAt(neighbour.subregion.child.avergX, neighbour.subregion.child.avergY));
+                        }
+                        else {
+                            neighbour.rCost = 0;
+                        }
+                        
                         neighbour.parent = currentNode;
 
-                        openSet.Add(neighbour);
+                        if (!isInOpenSet) {
+                            openSet.Add(neighbour);
+                        }
                     }
                 }
             }

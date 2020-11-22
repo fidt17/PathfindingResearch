@@ -21,6 +21,7 @@
           <e p="Managers" t="Include">
             <e p="InputManager.cs" t="Include" />
             <e p="MapManager.cs" t="Include" />
+            <e p="PathfindingVersionController.cs" t="Include" />
             <e p="SaveManager.cs" t="Include" />
           </e>
           <e p="Pathfinding" t="Include">

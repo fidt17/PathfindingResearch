@@ -20,6 +20,21 @@ public class InputManager : Singleton<InputManager> {
         if (t != null && MapManager.GetInstance().ActorPosition != position && MapManager.GetInstance().TargetPosition != position) {
             t.SetTraversability(false);
         }
+        
+        t = MapManager.GetInstance().TileAt(position.x + 1, position.y);
+        if (t != null && MapManager.GetInstance().ActorPosition != position && MapManager.GetInstance().TargetPosition != position) {
+            t.SetTraversability(false);
+        }
+        
+        t = MapManager.GetInstance().TileAt(position.x + 1, position.y - 1);
+        if (t != null && MapManager.GetInstance().ActorPosition != position && MapManager.GetInstance().TargetPosition != position) {
+            t.SetTraversability(false);
+        }
+        
+        t = MapManager.GetInstance().TileAt(position.x, position.y - 1);
+        if (t != null && MapManager.GetInstance().ActorPosition != position && MapManager.GetInstance().TargetPosition != position) {
+            t.SetTraversability(false);
+        }
     }
 
     private void DemolishWallAt(Vector2Int position) {

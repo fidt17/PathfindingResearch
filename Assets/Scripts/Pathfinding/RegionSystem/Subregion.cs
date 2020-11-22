@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class Subregion {
 
-    public HashSet<Node> nodes                  { get; protected set; } = new HashSet<Node>();
-    public List<Subregion>  neighbouringSubregions { get; protected set; } = new List<Subregion>();
+    public HashSet<Node>   nodes { get; protected set; } = new HashSet<Node>();
+    public List<Subregion> neighbouringSubregions { get; protected set; } = new List<Subregion>();
 
     public Region region { get; protected set; }
 
@@ -21,8 +21,7 @@ public class Subregion {
     public int       fCost => gCost + hCost;
 
     public Subregion child;
-    public int avergX,     avergY;
-    //
+    public int       avergX, avergY;
 
     public void CalculateAverageCoordinates() {
         //Finding node with minimum distance to all other nodes

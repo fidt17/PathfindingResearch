@@ -13,9 +13,18 @@
     <list default="true" id="8afc7f96-33cb-4179-9234-fc7f56477df3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.PathfindingResearch/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PathfindingResearch/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.PathfindingResearch/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PathfindingResearch/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Maps/map0.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Maps/map0.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Maps/map1.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Maps/map1.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Maps/map1.json.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Maps/map1.json.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Maps/map2.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Maps/map2.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Maps/map2.json.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Maps/map2.json.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Maps/map3.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Maps/map3.json.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/InputManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/InputManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Pathfinding/Node.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Pathfinding/Node.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Pathfinding/RegionSystem/Subregion.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Pathfinding/RegionSystem/Subregion.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/RCostPathfinding/AStarSearch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/RCostPathfinding/AStarSearch.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,16 +42,18 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/DefaultPathfinding/PathGrid.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/DefaultPathfinding/Pathfinder.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Drawer.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Pathfinding/RegionSystem/SubregionSystem.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Pathfinding/AStarSearch.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/DefaultPathfinding/AStarSearch.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Pathfinding/Pathfinder.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Pathfinding/RegionSystem/Subregion.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Pathfinding/AStartSubregionSearch.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/RCostPathfinding/AStarSearch.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Pathfinding/Node.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/FloodFill/FloodFill.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Managers/PathfindingBlockController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Managers/InputManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Managers/PathfindingVersionController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Pathfinding/RegionSystem/Subregion.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Pathfinding/RegionSystem/SubregionSystem.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/RCostPathfinding/AStarSearch.cs" />
       </list>
     </option>
   </component>
@@ -75,10 +86,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="11836">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="11836" />
       <option name="selectedOptions">
         <set />
       </option>
@@ -97,6 +108,8 @@
       <workItem from="1605488051635" duration="6929000" />
       <workItem from="1605607780051" duration="1000" />
       <workItem from="1605664954557" duration="3442000" />
+      <workItem from="1605852152481" duration="183000" />
+      <workItem from="1606048177953" duration="10409000" />
     </task>
     <servers />
   </component>
@@ -121,96 +134,77 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="579" height="466" key="DebuggerActiveHint" timestamp="1605493988230">
+    <state width="579" height="466" key="DebuggerActiveHint" timestamp="1606061184450">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="579" height="466" key="DebuggerActiveHint/0.0.1920.1080@0.0.1920.1080" timestamp="1605493988230" />
-    <state width="1877" height="197" key="GridCell.Tab.0.bottom" timestamp="1605495474877">
+    <state width="579" height="466" key="DebuggerActiveHint/0.0.1920.1080@0.0.1920.1080" timestamp="1606061184450" />
+    <state width="1877" height="197" key="GridCell.Tab.0.bottom" timestamp="1606070490230">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="197" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1605495474877" />
-    <state width="1877" height="197" key="GridCell.Tab.0.center" timestamp="1605495474877">
+    <state width="1877" height="197" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1606070490230" />
+    <state width="1877" height="197" key="GridCell.Tab.0.center" timestamp="1606070490229">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="197" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1605495474877" />
-    <state width="1877" height="197" key="GridCell.Tab.0.left" timestamp="1605495474877">
+    <state width="1877" height="197" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1606070490229" />
+    <state width="1877" height="197" key="GridCell.Tab.0.left" timestamp="1606070490229">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="197" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1605495474877" />
-    <state width="1877" height="197" key="GridCell.Tab.0.right" timestamp="1605495474877">
+    <state width="1877" height="197" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1606070490229" />
+    <state width="1877" height="197" key="GridCell.Tab.0.right" timestamp="1606070490230">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="197" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1605495474877" />
-    <state width="1877" height="197" key="GridCell.Tab.1.bottom" timestamp="1605495474877">
+    <state width="1877" height="197" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1606070490230" />
+    <state width="1877" height="197" key="GridCell.Tab.1.bottom" timestamp="1606070490230">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="197" key="GridCell.Tab.1.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1605495474877" />
-    <state width="1877" height="197" key="GridCell.Tab.1.center" timestamp="1605495474877">
+    <state width="1877" height="197" key="GridCell.Tab.1.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1606070490230" />
+    <state width="1877" height="197" key="GridCell.Tab.1.center" timestamp="1606070490230">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="197" key="GridCell.Tab.1.center/0.0.1920.1080@0.0.1920.1080" timestamp="1605495474877" />
-    <state width="1877" height="197" key="GridCell.Tab.1.left" timestamp="1605495474877">
+    <state width="1877" height="197" key="GridCell.Tab.1.center/0.0.1920.1080@0.0.1920.1080" timestamp="1606070490230" />
+    <state width="1877" height="197" key="GridCell.Tab.1.left" timestamp="1606070490230">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="197" key="GridCell.Tab.1.left/0.0.1920.1080@0.0.1920.1080" timestamp="1605495474877" />
-    <state width="1877" height="197" key="GridCell.Tab.1.right" timestamp="1605495474877">
+    <state width="1877" height="197" key="GridCell.Tab.1.left/0.0.1920.1080@0.0.1920.1080" timestamp="1606070490230" />
+    <state width="1877" height="197" key="GridCell.Tab.1.right" timestamp="1606070490230">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="197" key="GridCell.Tab.1.right/0.0.1920.1080@0.0.1920.1080" timestamp="1605495474877" />
-    <state width="1877" height="197" key="GridCell.Tab.2.bottom" timestamp="1605495474877">
+    <state width="1877" height="197" key="GridCell.Tab.1.right/0.0.1920.1080@0.0.1920.1080" timestamp="1606070490230" />
+    <state width="1877" height="197" key="GridCell.Tab.2.bottom" timestamp="1606070490231">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="197" key="GridCell.Tab.2.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1605495474877" />
-    <state width="1877" height="197" key="GridCell.Tab.2.center" timestamp="1605495474877">
+    <state width="1877" height="197" key="GridCell.Tab.2.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1606070490231" />
+    <state width="1877" height="197" key="GridCell.Tab.2.center" timestamp="1606070490230">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="197" key="GridCell.Tab.2.center/0.0.1920.1080@0.0.1920.1080" timestamp="1605495474877" />
-    <state width="1877" height="197" key="GridCell.Tab.2.left" timestamp="1605495474877">
+    <state width="1877" height="197" key="GridCell.Tab.2.center/0.0.1920.1080@0.0.1920.1080" timestamp="1606070490230" />
+    <state width="1877" height="197" key="GridCell.Tab.2.left" timestamp="1606070490230">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="197" key="GridCell.Tab.2.left/0.0.1920.1080@0.0.1920.1080" timestamp="1605495474877" />
-    <state width="1877" height="197" key="GridCell.Tab.2.right" timestamp="1605495474877">
+    <state width="1877" height="197" key="GridCell.Tab.2.left/0.0.1920.1080@0.0.1920.1080" timestamp="1606070490230" />
+    <state width="1877" height="197" key="GridCell.Tab.2.right" timestamp="1606070490231">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="197" key="GridCell.Tab.2.right/0.0.1920.1080@0.0.1920.1080" timestamp="1605495474877" />
-    <state width="1877" height="197" key="GridCell.Tab.3.bottom" timestamp="1605495474877">
+    <state width="1877" height="197" key="GridCell.Tab.2.right/0.0.1920.1080@0.0.1920.1080" timestamp="1606070490231" />
+    <state width="1877" height="197" key="GridCell.Tab.3.bottom" timestamp="1606070490231">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="197" key="GridCell.Tab.3.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1605495474877" />
-    <state width="1877" height="197" key="GridCell.Tab.3.center" timestamp="1605495474877">
+    <state width="1877" height="197" key="GridCell.Tab.3.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1606070490231" />
+    <state width="1877" height="197" key="GridCell.Tab.3.center" timestamp="1606070490231">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="197" key="GridCell.Tab.3.center/0.0.1920.1080@0.0.1920.1080" timestamp="1605495474877" />
-    <state width="1877" height="197" key="GridCell.Tab.3.left" timestamp="1605495474877">
+    <state width="1877" height="197" key="GridCell.Tab.3.center/0.0.1920.1080@0.0.1920.1080" timestamp="1606070490231" />
+    <state width="1877" height="197" key="GridCell.Tab.3.left" timestamp="1606070490231">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="197" key="GridCell.Tab.3.left/0.0.1920.1080@0.0.1920.1080" timestamp="1605495474877" />
-    <state width="1877" height="197" key="GridCell.Tab.3.right" timestamp="1605495474877">
+    <state width="1877" height="197" key="GridCell.Tab.3.left/0.0.1920.1080@0.0.1920.1080" timestamp="1606070490231" />
+    <state width="1877" height="197" key="GridCell.Tab.3.right" timestamp="1606070490231">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="197" key="GridCell.Tab.3.right/0.0.1920.1080@0.0.1920.1080" timestamp="1605495474877" />
+    <state width="1877" height="197" key="GridCell.Tab.3.right/0.0.1920.1080@0.0.1920.1080" timestamp="1606070490231" />
     <state x="623" y="235" key="search.everywhere.popup" timestamp="1605493692631">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="623" y="235" key="search.everywhere.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1605493692631" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/RCostPathfinding/AStarSearch.cs</url>
-          <line>69</line>
-          <properties documentPath="D:\Repositories\PathfindingResearch\Assets\Scripts\RCostPathfinding\AStarSearch.cs" initialLine="57">
-            <startOffsets>
-              <option value="2558" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2575" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
