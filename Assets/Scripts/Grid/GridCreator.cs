@@ -38,6 +38,24 @@ public class GridCreator : MonoBehaviour {
 		_tiles[x + y * MapHeight].color = GetColorByType(type);
 	}
 
+	public void GenerateRandomMap(float chanceOfWall)
+	{
+		MapWidth = 100;
+		MapHeight = 100;
+		MapManager.GetInstance().UpdateMapData();
+		GenerateGrid();
+
+		for (int x = 0; x < MapWidth; x++)
+		{
+			for (int y = 0; y < MapHeight; y++)
+			{
+				float r = UnityEngine.Random.Range(0f, 1f);
+				MapManager.GetInstance().TileAt(x, y).SetTraversability(r > chanceOfWall);
+			}
+		}
+	}
+	
+	
 	public void GenerateMapFromSaveData(MapData data) {
 		MapWidth = data.mapWidth;
 		MapHeight = data.mapHeight;

@@ -12,19 +12,12 @@
   <component name="ChangeListManager">
     <list default="true" id="8afc7f96-33cb-4179-9234-fc7f56477df3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.PathfindingResearch/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PathfindingResearch/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.PathfindingResearch/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PathfindingResearch/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.PathfindingResearch/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PathfindingResearch/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Maps/map0.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Maps/map0.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Maps/map1.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Maps/map1.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Maps/map1.json.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Maps/map1.json.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Maps/map2.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Maps/map2.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Maps/map2.json.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Maps/map2.json.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Maps/map3.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Maps/map3.json.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/InputManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/InputManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Pathfinding/RegionSystem/Subregion.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Pathfinding/RegionSystem/Subregion.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/RCostPathfinding/AStarSearch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/RCostPathfinding/AStarSearch.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/PackageManagerSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/PackageManagerSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,10 +79,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="11836">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="11836" />
+      <option name="pid" />
       <option name="selectedOptions">
         <set />
       </option>
@@ -110,6 +103,7 @@
       <workItem from="1605664954557" duration="3442000" />
       <workItem from="1605852152481" duration="183000" />
       <workItem from="1606048177953" duration="10409000" />
+      <workItem from="1607240162591" duration="245000" />
     </task>
     <servers />
   </component>
